@@ -1,7 +1,5 @@
 package ui;
 
-import model.ToDoList;
-
 import java.text.ParseException;
 
 public class Main {
