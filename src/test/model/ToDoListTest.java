@@ -19,16 +19,16 @@ public class ToDoListTest {
 
     @Test
     void getSizeTest() throws ParseException {
-        assertTrue(toDoList.getSize() == 0);
+        assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
-        assertTrue(toDoList.getSize() == 1);
+        assertEquals(1, toDoList.getSize());
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
-        assertTrue(toDoList.getSize() == 2);
+        assertEquals(2, toDoList.getSize());
     }
 
     @Test
     void addTaskTest() throws ParseException {
-        assertTrue(toDoList.getSize() == 0);
+        assertEquals(0, toDoList.getSize());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         assertEquals("homework1", toDoList.getTaskByIndex(0).getName());
@@ -38,15 +38,15 @@ public class ToDoListTest {
 
     @Test
     void addTaskFailedTest() throws ParseException {
-        assertTrue(toDoList.getSize() == 0);
+        assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
         toDoList.addTask("homework3", sdf.parse("2021-02-13"), "Haven't start");
         toDoList.addTask("homework4", sdf.parse("2021-02-14"), "Haven't start");
         toDoList.addTask("homework5", sdf.parse("2021-02-15"), "Haven't start");
-        assertTrue(toDoList.getSize() == 5);
+        assertEquals(5, toDoList.getSize());
         toDoList.addTask("homework6", sdf.parse("2021-02-16"), "Haven't start");
-        assertTrue(toDoList.getSize() == 5);
+        assertEquals(5, toDoList.getSize());
         assertEquals("homework1", toDoList.getTaskByIndex(0).getName());
         assertEquals("homework2", toDoList.getTaskByIndex(1).getName());
         assertEquals("homework3", toDoList.getTaskByIndex(2).getName());
@@ -56,7 +56,7 @@ public class ToDoListTest {
 
     @Test
     void getTaskByIndexTest() throws ParseException {
-        assertTrue(toDoList.getSize() == 0);
+        assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
         assertEquals("homework1", toDoList.getTaskByIndex(0).getName());
@@ -69,7 +69,7 @@ public class ToDoListTest {
 
     @Test
     void deleteTaskTest() throws ParseException {
-        assertTrue(toDoList.getSize() == 0);
+        assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
         assertEquals(2, toDoList.getSize());

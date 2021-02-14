@@ -9,10 +9,13 @@ import java.util.Scanner;
 
 // task management application
 public class ToDoListApp {
-    private Task task;
     private ToDoList toDoList;
     private Scanner input;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf;
+
+    {
+        sdf = new SimpleDateFormat("yyyy-MM-dd");
+    }
 
     // EFFECTS: runs the App
     public ToDoListApp() throws ParseException {
@@ -23,7 +26,7 @@ public class ToDoListApp {
     // EFFECTS: processes user input
     private void runToDoList() throws ParseException {
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         init();
 
@@ -45,23 +48,28 @@ public class ToDoListApp {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) throws ParseException {
-        if (command.equals("en")) {
-            doEditTaskName();
-        } else if (command.equals("es")) {
-            doEditTaskStatus();
-        } else if (command.equals("a")) {
-            doAddTask();
-        } else if (command.equals("d")) {
-            doDeleteTask();
-        } else {
-            System.out.println("Selection not valid...");
+        switch (command) {
+            case "en":
+                doEditTaskName();
+                break;
+            case "es":
+                doEditTaskStatus();
+                break;
+            case "a":
+                doAddTask();
+                break;
+            case "d":
+                doDeleteTask();
+                break;
+            default:
+                System.out.println("Selection not valid...");
+                break;
         }
     }
 
     // MODIFIES: this
     // EFFECTS: initializes accounts
-    private void init() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public void init() {
         input = new Scanner(System.in);
     }
 
@@ -84,7 +92,7 @@ public class ToDoListApp {
             System.out.println("Enter the task name you want to edit\n");
             String name = input.next();
             for (int i = 0; i < toDoList.getSize(); i++) {
-                if (toDoList.getTaskByIndex(i).getName() == name) {
+                if (toDoList.getTaskByIndex(i).getName().equals(name)) {
                     System.out.println("Enter new name\n");
                     String newName = input.next();
                     toDoList.getTaskByIndex(i).setName(newName);
@@ -108,7 +116,7 @@ public class ToDoListApp {
             System.out.println("Enter the task name you want to edit\n");
             String name = input.next();
             for (int i = 0; i < toDoList.getSize(); i++) {
-                if (toDoList.getTaskByIndex(i).getName() == name) {
+                if (toDoList.getTaskByIndex(i).getName().equals(name)) {
                     System.out.println("Enter new status\n");
                     String newStatus = input.next();
                     toDoList.getTaskByIndex(i).setName(newStatus);
@@ -151,7 +159,7 @@ public class ToDoListApp {
             System.out.println("Enter the task name you want to delete\n");
             String name = input.next();
             for (int i = 0; i < toDoList.getSize(); i++) {
-                if (toDoList.getTaskByIndex(i).getName() == name) {
+                if (toDoList.getTaskByIndex(i).getName().equals(name)) {
                     toDoList.deleteTask(name);
                 }
                 System.out.println("Task not exist\n");

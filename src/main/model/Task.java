@@ -5,7 +5,7 @@ import java.util.Date;
 // Represents a Task having a name, due date and status
 public class Task {
     private String name;                   // the Task name
-    private Date dueDate;                  // Task due date as 8digit integer, eg: 20210201 means 2021 February 1st
+    private Date dueDate;                  // the Task due date
     private String status;                 // the current status of the Task
 
     //REQUIRES: taskName has a non-zero length

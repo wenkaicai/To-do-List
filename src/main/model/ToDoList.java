@@ -43,7 +43,7 @@ public class ToDoList {
     //EFFECTS: delete a task in our ToDoList
     public void deleteTask(String name) {
         for (int i = 0; i < tasksList.size(); i++) {
-            if (tasksList.get(i).getName() == name) {
+            if (tasksList.get(i).getName().equals(name)) {
                 tasksList.remove(i);
             }
         }
