@@ -60,7 +60,7 @@ public class ToDoListTest {
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
         assertEquals("homework1", toDoList.getTaskByIndex(0).getName());
-        assertEquals(sdf.parse("2021-02-10"), toDoList.getTaskByIndex(0).getDueDate());
+        assertEquals(sdf.parse("2021-02-11"), toDoList.getTaskByIndex(0).getDueDate());
         assertEquals("Doing", toDoList.getTaskByIndex(0).getStatus());
         assertEquals("homework2", toDoList.getTaskByIndex(1).getName());
         assertEquals(sdf.parse("2021-02-12"), toDoList.getTaskByIndex(1).getDueDate());

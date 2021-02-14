@@ -16,7 +16,6 @@ public class Task {
         this.status = status;
     }
 
-
     // EFFECTS: return this task's name
     public String getName() {
         return name;
@@ -50,9 +49,4 @@ public class Task {
         this.status = status;
     }
 
-    // EFFECTS: returns a string representation of task
-    @Override
-    public String toString() {
-        return "[ name = " + name + ", dueDate = " + dueDate + ", status = " + status + "]";
-    }
 }
