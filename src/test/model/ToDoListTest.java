@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -68,12 +69,29 @@ public class ToDoListTest {
     }
 
     @Test
+    void getTasksTest() throws ParseException {
+        assertEquals(0, toDoList.getSize());
+        toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
+        toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
+        ArrayList<Task> arrayList = new ArrayList<>();
+        arrayList.add(new Task("homework1", sdf.parse("2021-02-11"), "Doing"));
+        arrayList.add(new Task("homework2", sdf.parse("2021-02-12"), "Haven't start"));
+        assertEquals(arrayList.get(0).getName(), toDoList.getTasks().get(0).getName());
+        assertEquals(arrayList.get(0).getDueDate(), toDoList.getTasks().get(0).getDueDate());
+        assertEquals(arrayList.get(0).getStatus(), toDoList.getTasks().get(0).getStatus());
+        assertEquals(arrayList.get(1).getName(), toDoList.getTasks().get(1).getName());
+        assertEquals(arrayList.get(1).getDueDate(), toDoList.getTasks().get(1).getDueDate());
+        assertEquals(arrayList.get(1).getStatus(), toDoList.getTasks().get(1).getStatus());
+    }
+
+    @Test
     void deleteTaskTest() throws ParseException {
         assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
         assertEquals(2, toDoList.getSize());
         toDoList.deleteTask("homework1");
+        toDoList.deleteTask("homework3");
         assertEquals(1, toDoList.getSize());
         assertEquals("homework2", toDoList.getTaskByIndex(0).getName());
         assertEquals(sdf.parse("2021-02-12"), toDoList.getTaskByIndex(0).getDueDate());
