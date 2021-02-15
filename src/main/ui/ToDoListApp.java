@@ -61,6 +61,9 @@ public class ToDoListApp {
             case "d":
                 doDeleteTask();
                 break;
+            case "v":
+                doViewTasks();
+                break;
             default:
                 System.out.println("Selection not valid...");
                 break;
@@ -68,8 +71,9 @@ public class ToDoListApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: initializes accounts
+    // EFFECTS: initializes To-Do List
     public void init() {
+        toDoList = new ToDoList();
         input = new Scanner(System.in);
     }
 
@@ -80,6 +84,7 @@ public class ToDoListApp {
         System.out.println("\tes -> editTaskStatus");
         System.out.println("\ta -> addTask");
         System.out.println("\td -> deleteTask");
+        System.out.println("\tv -> viewTasks");
         System.out.println("\tq -> quit");
     }
 
@@ -169,6 +174,20 @@ public class ToDoListApp {
             System.out.println(task.getName());
             System.out.println(task.getDueDate());
             System.out.println(task.getStatus());
+        }
+    }
+
+    // MODIFIES: nothing
+    // EFFECTS: view user tasks in To-Do List
+    private void doViewTasks() {
+        if (toDoList.getSize() == 0) {
+            System.out.println("No task to view\n");
+        } else {
+            for (Task task : toDoList.getTasks()) {
+                System.out.println(task.getName());
+                System.out.println(task.getDueDate());
+                System.out.println(task.getStatus());
+            }
         }
     }
 }
