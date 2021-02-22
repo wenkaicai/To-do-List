@@ -24,6 +24,6 @@ strategy that works great!
 - As a user, I want to be able to edit a task name in my to-do list
 - As a user, I want to be able to edit a task status in my to-do list
 - As a user, I want to be able to add multiple tasks to my to-do list
-- As a user, I want to be able to delete a task in to-do list
+- As a user, I want to be able to delete a task in my to-do list
 - As a user, I want to view my to-do list
 
