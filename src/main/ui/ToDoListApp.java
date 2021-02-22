@@ -124,7 +124,7 @@ public class ToDoListApp {
                 if (toDoList.getTaskByIndex(i).getName().equals(name)) {
                     System.out.println("Enter new status\n");
                     String newStatus = input.next();
-                    toDoList.getTaskByIndex(i).setName(newStatus);
+                    toDoList.getTaskByIndex(i).setStatus(newStatus);
                 }
                 System.out.println("Task not exist\n");
             }
