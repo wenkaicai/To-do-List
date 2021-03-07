@@ -104,8 +104,8 @@ public class ToDoListApp {
                     System.out.println("Enter new name\n");
                     String newName = input.next();
                     toDoList.getTaskByIndex(i).setName(newName);
+                    System.out.println("Task name changed!\n");
                 }
-                System.out.println("Task not exist\n");
             }
         }
         for (Task task : toDoList.getTasks()) {
@@ -128,8 +128,8 @@ public class ToDoListApp {
                     System.out.println("Enter new status\n");
                     String newStatus = input.next();
                     toDoList.getTaskByIndex(i).setStatus(newStatus);
+                    System.out.println("Task status changed!\n");
                 }
-                System.out.println("Task not exist\n");
             }
         }
         for (Task task : toDoList.getTasks()) {
@@ -169,8 +169,8 @@ public class ToDoListApp {
             for (int i = 0; i < toDoList.getSize(); i++) {
                 if (toDoList.getTaskByIndex(i).getName().equals(name)) {
                     toDoList.deleteTask(name);
+                    System.out.println("Task deleted!\n");
                 }
-                System.out.println("Task not exist\n");
             }
         }
         for (Task task : toDoList.getTasks()) {
