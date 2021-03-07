@@ -22,7 +22,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads to-do-list from file and returns it;
     // throws IOException if an error occurs reading data from file
     public ToDoList read() throws IOException, ParseException {
         String jsonData = readFile(source);
