@@ -1,9 +1,14 @@
 package model;
 
+import javafx.beans.binding.Bindings;
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 // Represents a Task having a name, due date and status
-public class Task {
+public class Task implements Writable {
     private String name;                   // the Task name
     private Date dueDate;                  // the Task due date
     private String status;                 // the current status of the Task
@@ -49,4 +54,13 @@ public class Task {
         this.status = status;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        json.put("dueDate", sdf.format(dueDate));
+        json.put("status", status);
+        return json;
+    }
 }

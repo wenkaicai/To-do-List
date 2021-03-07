@@ -15,7 +15,7 @@ public class ToDoListTest {
 
     @BeforeEach
     void setUp() {
-        toDoList = new ToDoList();
+        toDoList = new ToDoList("todolist1");
     }
 
     @Test

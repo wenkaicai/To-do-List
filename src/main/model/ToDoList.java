@@ -1,14 +1,24 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ToDoList {
+public class ToDoList implements Writable {
+    private String name;
     private ArrayList<Task> tasksList;
     private static final int MAX_SIZE_TASKS = 5;
 
-    public ToDoList() {
+    public ToDoList(String name) {
+        this.name = name;
         tasksList = new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
     }
 
     //EFFECTS: returns the task list size
@@ -47,6 +57,25 @@ public class ToDoList {
                 tasksList.remove(i);
             }
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("tasksList", tasksListToJson());
+        return json;
+    }
+
+    // EFFECTS: returns tasks in this tasks list as a JSON array
+    private JSONArray tasksListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Task t : tasksList) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }
 
