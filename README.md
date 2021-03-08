@@ -27,4 +27,4 @@ strategy that works great!
 - As a user, I want to be able to delete a task in my to-do list
 - As a user, I want to view my to-do list
 - As a user, I want to be able to save my to-do list to file
-- As a user, I want to be able to be able to load my to-do list from file 
+- As a user, I want to be able to load my to-do list from file 
