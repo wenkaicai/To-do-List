@@ -53,6 +53,10 @@ public class Task implements Writable {
         this.status = status;
     }
 
+    public String displayTask() {
+        return this.getName() + " " + this.getDueDate() + " " + this.getStatus();
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

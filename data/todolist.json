@@ -4,16 +4,16 @@
         {
             "dueDate": "2020-02-02",
             "name": "lab2",
-            "status": "begin"
+            "status": "finished"
         },
         {
             "dueDate": "2020-03-04",
-            "name": "lab3",
+            "name": "lab5",
             "status": "finished"
         },
         {
             "dueDate": "2020-03-02",
-            "name": "lab4",
+            "name": "lab6",
             "status": "start"
         }
     ]
