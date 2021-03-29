@@ -42,21 +42,36 @@ public class Panel extends JPanel
     JButton saveButton = new JButton(saveString);
     JButton loadButton = new JButton(loadString);
 
-    @SuppressWarnings("checkstyle:MethodLength")
     public Panel() throws Exception {
         super(new BorderLayout());
-
         //Create the list and put it in a scroll pane.
         list = new JList(toDoListModel);
         toDoListModel.addElement("lab1");
-        toDoListModel.addElement("lab2");
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setSelectedIndex(0);
         list.addListSelectionListener(this);
         list.setVisibleRowCount(20);
         JScrollPane listScrollPane = new JScrollPane(list);
-        this.playSound();
+        this.buildButtonAndPane();
 
+        JPanel buttonPane = new JPanel();
+        buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
+        buttonPane.add(addButton);
+        buttonPane.add(removeButton);
+        buttonPane.add(saveButton);
+        buttonPane.add(loadButton);
+        JPanel myFlowPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        myFlowPanel1.add(taskName);
+        myFlowPanel1.add(taskNmTextField);
+        JPanel gridPanel = new JPanel(new GridLayout());
+        gridPanel.add(myFlowPanel1);
+        gridPanel.add(buttonPane);
+        add(listScrollPane, BorderLayout.NORTH);
+        add(gridPanel, BorderLayout.CENTER);
+    }
+
+
+    private void buildButtonAndPane() {
         AddListener addListener = new AddListener(addButton);
         addButton.setActionCommand(addString);
         addButton.addActionListener(addListener);
@@ -70,30 +85,12 @@ public class Panel extends JPanel
 
         saveButton.setActionCommand(saveString);
         saveButton.addActionListener(new SaveListener());
-        //***
-
         taskNmTextField = new JTextField(12);
         taskNmTextField.addActionListener(addListener);
         taskNmTextField.getDocument().addDocumentListener(addListener);
-
-        JPanel buttonPane = new JPanel();
-        buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
-        buttonPane.add(addButton);
-        buttonPane.add(removeButton);
-        buttonPane.add(saveButton);
-        buttonPane.add(loadButton);
-
-        JPanel myFlowPanel1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        myFlowPanel1.add(taskName);
-        myFlowPanel1.add(taskNmTextField);
-
-        JPanel gridPanel = new JPanel(new GridLayout());
-        gridPanel.add(myFlowPanel1);
-        gridPanel.add(buttonPane);
-
-        add(listScrollPane, BorderLayout.NORTH);
-        add(gridPanel, BorderLayout.CENTER);
     }
+    //***
+
 
     // Return all tasks name to a todolist
     public ToDoList modelToToDoList(ListModel toDoListModel) throws ParseException {
@@ -273,6 +270,7 @@ public class Panel extends JPanel
                 e1.printStackTrace();
             }
         }
+
     }
 
     public void doSaveCommand(DefaultListModel toDoListModel, String filename) throws Exception {
