@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-
+// Create TodoList Application panel
 public class Panel extends JPanel
         implements ListSelectionListener {
 
@@ -103,7 +103,7 @@ public class Panel extends JPanel
 
     //EFFECTS: play the sound file
     private void playSound() throws Exception {
-        File soundFile = new File("smu.wav");
+        File soundFile = new File("/data/smu.wav");
         try {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();
@@ -240,7 +240,7 @@ public class Panel extends JPanel
     private class LoadListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
-                doLoadCommand("/Users/wenka/IdeaProjects/CPSC210/labs/project_q6d3d/data/todolist.json");
+                doLoadCommand("./data/todolist.json");
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -262,7 +262,7 @@ public class Panel extends JPanel
         public void actionPerformed(ActionEvent e) {
             try {
                 doSaveCommand(toDoListModel,
-                        "/Users/wenka/IdeaProjects/CPSC210/labs/project_q6d3d/data/todolist.json");
+                        "./data/todolist.json");
             } catch (Exception e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();

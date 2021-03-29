@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
+// Create ToDoListGui Frame
 public class Frame extends JFrame {
     Panel panel = new Panel();
 
