@@ -1,20 +1,8 @@
 {
     "name": "TDL1",
-    "tasksList": [
-        {
-            "dueDate": "1111-11-11",
-            "name": "lab1",
-            "status": "nonStatus"
-        },
-        {
-            "dueDate": "1111-11-11",
-            "name": "lab3",
-            "status": "nonStatus"
-        },
-        {
-            "dueDate": "1111-11-11",
-            "name": "lab4",
-            "status": "nonStatus"
-        }
-    ]
+    "tasksList": [{
+        "dueDate": "1111-11-11",
+        "name": "lab1",
+        "status": "nonStatus"
+    }]
 }

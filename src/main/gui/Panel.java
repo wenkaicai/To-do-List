@@ -103,7 +103,7 @@ public class Panel extends JPanel
 
     //EFFECTS: play the sound file
     private void playSound() throws Exception {
-        File soundFile = new File("/data/smu.wav");
+        File soundFile = new File("./data/smu.wav");
         try {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             Clip clip = AudioSystem.getClip();
