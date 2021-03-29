@@ -52,8 +52,7 @@ public class Panel extends JPanel
         list.addListSelectionListener(this);
         list.setVisibleRowCount(20);
         JScrollPane listScrollPane = new JScrollPane(list);
-        this.buildButtonAndPane();
-
+        this.commandButtonAndTxtField();
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
         buttonPane.add(addButton);
@@ -70,8 +69,8 @@ public class Panel extends JPanel
         add(gridPanel, BorderLayout.CENTER);
     }
 
-
-    private void buildButtonAndPane() {
+    // Effect: Build command buttons and task names field
+    private void commandButtonAndTxtField() {
         AddListener addListener = new AddListener(addButton);
         addButton.setActionCommand(addString);
         addButton.addActionListener(addListener);
@@ -92,7 +91,7 @@ public class Panel extends JPanel
     //***
 
 
-    // Return all tasks name to a todolist
+    // Effect: Return all tasks name to a todolist
     public ToDoList modelToToDoList(ListModel toDoListModel) throws ParseException {
         ToDoList toDoList = new ToDoList("TDL1");
         for (int i = 0; i < toDoListModel.getSize(); i++) {
@@ -102,6 +101,7 @@ public class Panel extends JPanel
         return toDoList;
     }
 
+    //EFFECTS: play the sound file
     private void playSound() throws Exception {
         File soundFile = new File("smu.wav");
         try {
@@ -111,12 +111,6 @@ public class Panel extends JPanel
             clip.start();
         } catch (UnsupportedAudioFileException | IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void actionPerformed(ActionEvent e) throws Exception {
-        if (e.getActionCommand().equals("Add")) {
-            playSound();
         }
     }
 
@@ -215,6 +209,7 @@ public class Panel extends JPanel
             }
         }
 
+        //Required by DocumentListener.
         private void enableButton() {
             if (!alreadyEnabled) {
                 addButton.setEnabled(true);
@@ -241,6 +236,7 @@ public class Panel extends JPanel
         }
     }
 
+    //This listener is shared by the text field and the loadButton.
     private class LoadListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
@@ -250,6 +246,7 @@ public class Panel extends JPanel
             }
         }
 
+        // Load to-do-list from file
         public void doLoadCommand(String filename) throws Exception {
             JsonReader reader = new JsonReader(filename);
             ToDoList toDoList = reader.read();
@@ -260,6 +257,7 @@ public class Panel extends JPanel
         }
     }
 
+    //This listener is shared by the text field and the saveButton.
     private class SaveListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             try {
@@ -273,6 +271,7 @@ public class Panel extends JPanel
 
     }
 
+    //Save to-do-list to file
     public void doSaveCommand(DefaultListModel toDoListModel, String filename) throws Exception {
         JsonWriter writer = new JsonWriter(filename);
         writer.open();
