@@ -5,6 +5,8 @@ import model.ToDoList;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.sound.sampled.*;
+import java.io.File;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -13,6 +15,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -39,7 +42,8 @@ public class Panel extends JPanel
     JButton saveButton = new JButton(saveString);
     JButton loadButton = new JButton(loadString);
 
-    public Panel() {
+    @SuppressWarnings("checkstyle:MethodLength")
+    public Panel() throws Exception {
         super(new BorderLayout());
 
         //Create the list and put it in a scroll pane.
@@ -51,6 +55,7 @@ public class Panel extends JPanel
         list.addListSelectionListener(this);
         list.setVisibleRowCount(20);
         JScrollPane listScrollPane = new JScrollPane(list);
+        this.playSound();
 
         AddListener addListener = new AddListener(addButton);
         addButton.setActionCommand(addString);
@@ -62,12 +67,14 @@ public class Panel extends JPanel
 
         loadButton.setActionCommand(loadString);
         loadButton.addActionListener(new LoadListener());
+
+        saveButton.setActionCommand(saveString);
+        saveButton.addActionListener(new SaveListener());
         //***
 
         taskNmTextField = new JTextField(12);
         taskNmTextField.addActionListener(addListener);
         taskNmTextField.getDocument().addDocumentListener(addListener);
-        String taskNm = toDoListModel.getElementAt(list.getSelectedIndex()).toString();
 
         JPanel buttonPane = new JPanel();
         buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.LINE_AXIS));
@@ -92,10 +99,28 @@ public class Panel extends JPanel
     public ToDoList modelToToDoList(ListModel toDoListModel) throws ParseException {
         ToDoList toDoList = new ToDoList("TDL1");
         for (int i = 0; i < toDoListModel.getSize(); i++) {
-            toDoList.addTask(toDoListModel.getElementAt(i).toString(), sdf.parse("0000-00-00"),
+            toDoList.addTask(toDoListModel.getElementAt(i).toString(), sdf.parse("1111-11-11"),
                     "nonStatus");
         }
         return toDoList;
+    }
+
+    private void playSound() throws Exception {
+        File soundFile = new File("smu.wav");
+        try {
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioIn);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void actionPerformed(ActionEvent e) throws Exception {
+        if (e.getActionCommand().equals("Add")) {
+            playSound();
+        }
     }
 
     //This listener is shared by the text field and the deleteButton.
@@ -255,5 +280,6 @@ public class Panel extends JPanel
         writer.open();
         writer.write(modelToToDoList(toDoListModel));
         writer.close();
+        playSound();
     }
 }

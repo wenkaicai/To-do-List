@@ -6,7 +6,7 @@ import java.awt.*;
 public class Frame extends JFrame {
     Panel panel = new Panel();
 
-    Frame() {
+    Frame() throws Exception {
         this.setTitle("My Task Todolist");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit out of app
         this.setResizable(false); // prevent frame from being resized
