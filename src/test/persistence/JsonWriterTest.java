@@ -2,6 +2,7 @@ package persistence;
 
 import model.Task;
 import model.ToDoList;
+import model.TooManyTasksException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ class JsonWriterTest extends JsonTest {
             td = reader.read();
             assertEquals("todolist1", td.getName());
             assertEquals(0, td.getSize());
-        } catch (IOException | ParseException e) {
+        } catch (IOException | ParseException | TooManyTasksException e) {
             fail("Exception should not have been thrown");
         }
     }
@@ -63,7 +64,7 @@ class JsonWriterTest extends JsonTest {
             checkTask("homework1", sdf.parse("2021-02-11"), "Doing", tasks.get(0));
             checkTask("homework2", sdf.parse("2021-02-12"), "Haven't start", tasks.get(1));
 
-        } catch (IOException e) {
+        } catch (IOException | TooManyTasksException e) {
             fail("Exception should not have been thrown");
         }
     }

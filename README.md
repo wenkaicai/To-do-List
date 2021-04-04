@@ -31,3 +31,8 @@ strategy that works great!
 
 - As a user, I want to be able to save my to-do list to file
 - As a user, I want to be able to load my to-do list from file 
+
+## Phase 4: Task 2
+
+The ToDoList class, addTask method has a robust design, it will throw the exception if we want to add a task when we 
+todo list size larger or equal 5.

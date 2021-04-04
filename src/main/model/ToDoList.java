@@ -40,13 +40,11 @@ public class ToDoList implements Writable {
 
     //MODIFIES: this
     //EFFECTS: add a new task to our ToDoList
-    public ArrayList<Task> addTask(String name, Date dueDate, String status) {
+    public void addTask(String name, Date dueDate, String status) throws TooManyTasksException {
         if (tasksList.size() >= MAX_SIZE_TASKS) {
-            return tasksList;
-        } else {
-            tasksList.add(new Task(name, dueDate, status));
+            throw new TooManyTasksException();
         }
-        return null;
+        tasksList.add(new Task(name, dueDate, status));
     }
 
     //MODIFIES: this

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.stream.Stream;
 
+import model.TooManyTasksException;
 import org.json.*;
 
 // Represents a reader that reads workroom from JSON data stored in file
@@ -24,7 +25,7 @@ public class JsonReader {
 
     // EFFECTS: reads to-do-list from file and returns it;
     // throws IOException if an error occurs reading data from file
-    public ToDoList read() throws IOException, ParseException {
+    public ToDoList read() throws IOException, ParseException, TooManyTasksException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseToDoList(jsonObject);
@@ -42,7 +43,7 @@ public class JsonReader {
     }
 
     // EFFECTS: parses to-do-list from JSON object and returns it
-    private ToDoList parseToDoList(JSONObject jsonObject) throws ParseException {
+    private ToDoList parseToDoList(JSONObject jsonObject) throws ParseException, TooManyTasksException {
         String name = jsonObject.getString("name");
         ToDoList td = new ToDoList(name);
         addTasks(td, jsonObject);
@@ -51,7 +52,7 @@ public class JsonReader {
 
     // MODIFIES: td
     // EFFECTS: parses tasks from JSON object and adds them to to-do-list
-    private void addTasks(ToDoList td, JSONObject jsonObject) throws ParseException {
+    private void addTasks(ToDoList td, JSONObject jsonObject) throws ParseException, TooManyTasksException {
         JSONArray jsonArray = jsonObject.getJSONArray("tasksList");
         for (Object json : jsonArray) {
             JSONObject nextTask = (JSONObject) json;
@@ -61,7 +62,7 @@ public class JsonReader {
 
     // MODIFIES: td
     // EFFECTS: parses task from JSON object and adds it to to-do-list
-    private void addTask(ToDoList td, JSONObject jsonObject) throws ParseException {
+    private void addTask(ToDoList td, JSONObject jsonObject) throws ParseException, TooManyTasksException {
         String name = jsonObject.getString("name");
         String dueDate = jsonObject.getString("dueDate");
         String status = jsonObject.getString("status");

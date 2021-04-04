@@ -2,6 +2,7 @@ package ui;
 
 import model.Task;
 import model.ToDoList;
+import model.TooManyTasksException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -25,7 +26,7 @@ public class ToDoListApp {
     }
 
     // EFFECTS: runs the App
-    public ToDoListApp() throws ParseException, FileNotFoundException {
+    public ToDoListApp() throws ParseException, FileNotFoundException, TooManyTasksException {
         input = new Scanner(System.in);
         toDoList = new ToDoList("todolist1");
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -35,7 +36,7 @@ public class ToDoListApp {
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    private void runToDoList() throws ParseException {
+    private void runToDoList() throws ParseException, TooManyTasksException {
         boolean keepGoing = true;
         String command = null;
         input = new Scanner(System.in);
@@ -57,7 +58,7 @@ public class ToDoListApp {
 
     // MODIFIES: this
     // EFFECTS: processes user command
-    private void processCommand(String command) throws ParseException {
+    private void processCommand(String command) throws ParseException, TooManyTasksException {
         if (command.equals("en")) {
             doEditTaskName();
         } else if (command.equals("es")) {
@@ -141,7 +142,7 @@ public class ToDoListApp {
 
     // MODIFIES: this
     // EFFECTS: add a task to ToDoList
-    private void doAddTask() throws ParseException {
+    private void doAddTask() throws ParseException, TooManyTasksException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         System.out.println("Enter new Task name\n");
         String name = input.next();
@@ -212,7 +213,7 @@ public class ToDoListApp {
         try {
             toDoList = jsonReader.read();
             System.out.println("Loaded " + toDoList.getName() + " from " + JSON_STORE);
-        } catch (IOException | ParseException e) {
+        } catch (IOException | ParseException | TooManyTasksException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }

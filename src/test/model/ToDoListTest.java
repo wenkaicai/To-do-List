@@ -19,7 +19,7 @@ public class ToDoListTest {
     }
 
     @Test
-    void getSizeTest() throws ParseException {
+    void getSizeTest() throws ParseException, TooManyTasksException {
         assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         assertEquals(1, toDoList.getSize());
@@ -28,17 +28,22 @@ public class ToDoListTest {
     }
 
     @Test
-    void addTaskTest() throws ParseException {
+    void addTaskTest() throws ParseException, TooManyTasksException {
         assertEquals(0, toDoList.getSize());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         assertEquals("homework1", toDoList.getTaskByIndex(0).getName());
         assertEquals(sdf.parse("2021-02-11"), toDoList.getTaskByIndex(0).getDueDate());
         assertEquals("Doing", toDoList.getTaskByIndex(0).getStatus());
+        try {
+            toDoList.addTask("homework2", sdf.parse("2021-02-16"), "Haven't start");
+        } catch (TooManyTasksException e) {
+            fail();
+        }
     }
 
     @Test
-    void addTaskFailedTest() throws ParseException {
+    void addTooManyTasksTest() throws ParseException, TooManyTasksException {
         assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
@@ -46,17 +51,15 @@ public class ToDoListTest {
         toDoList.addTask("homework4", sdf.parse("2021-02-14"), "Haven't start");
         toDoList.addTask("homework5", sdf.parse("2021-02-15"), "Haven't start");
         assertEquals(5, toDoList.getSize());
-        toDoList.addTask("homework6", sdf.parse("2021-02-16"), "Haven't start");
-        assertEquals(5, toDoList.getSize());
-        assertEquals("homework1", toDoList.getTaskByIndex(0).getName());
-        assertEquals("homework2", toDoList.getTaskByIndex(1).getName());
-        assertEquals("homework3", toDoList.getTaskByIndex(2).getName());
-        assertEquals("homework4", toDoList.getTaskByIndex(3).getName());
-        assertEquals("homework5", toDoList.getTaskByIndex(4).getName());
+        try {
+            toDoList.addTask("homework6", sdf.parse("2021-02-16"), "Haven't start");
+        } catch (TooManyTasksException e) {
+            return;
+        }
     }
 
     @Test
-    void getTaskByIndexTest() throws ParseException {
+    void getTaskByIndexTest() throws ParseException, TooManyTasksException {
         assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
@@ -69,7 +72,7 @@ public class ToDoListTest {
     }
 
     @Test
-    void getTasksTest() throws ParseException {
+    void getTasksTest() throws ParseException, TooManyTasksException {
         assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");
@@ -85,7 +88,7 @@ public class ToDoListTest {
     }
 
     @Test
-    void deleteTaskTest() throws ParseException {
+    void deleteTaskTest() throws ParseException, TooManyTasksException {
         assertEquals(0, toDoList.getSize());
         toDoList.addTask("homework1", sdf.parse("2021-02-11"), "Doing");
         toDoList.addTask("homework2", sdf.parse("2021-02-12"), "Haven't start");

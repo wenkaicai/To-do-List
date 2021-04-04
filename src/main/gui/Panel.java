@@ -2,6 +2,7 @@ package gui;
 
 import model.Task;
 import model.ToDoList;
+import model.TooManyTasksException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -92,7 +93,7 @@ public class Panel extends JPanel
 
 
     // Effect: Return all tasks name to a todolist
-    public ToDoList modelToToDoList(ListModel toDoListModel) throws ParseException {
+    public ToDoList modelToToDoList(ListModel toDoListModel) throws ParseException, TooManyTasksException {
         ToDoList toDoList = new ToDoList("TDL1");
         for (int i = 0; i < toDoListModel.getSize(); i++) {
             toDoList.addTask(toDoListModel.getElementAt(i).toString(), sdf.parse("1111-11-11"),
@@ -124,7 +125,7 @@ public class Panel extends JPanel
             toDoListModel.remove(index);
             try {
                 modelToToDoList(toDoListModel);
-            } catch (ParseException parseException) {
+            } catch (ParseException | TooManyTasksException parseException) {
                 parseException.printStackTrace();
             }
             int size = toDoListModel.getSize();
@@ -175,7 +176,7 @@ public class Panel extends JPanel
             //watchlistModel.addElement(stockSymTextField.getText());
             try {
                 modelToToDoList(toDoListModel);
-            } catch (ParseException parseException) {
+            } catch (ParseException | TooManyTasksException parseException) {
                 parseException.printStackTrace();
             }
             //Reset the text field.

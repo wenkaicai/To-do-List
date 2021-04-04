@@ -2,6 +2,7 @@ package persistence;
 
 import model.Task;
 import model.ToDoList;
+import model.TooManyTasksException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ class JsonReaderTest extends JsonTest {
         try {
             ToDoList td = reader.read();
             fail("IOException expected");
-        } catch (IOException | ParseException e) {
+        } catch (IOException | ParseException | TooManyTasksException e) {
             // pass
         }
     }
@@ -32,7 +33,7 @@ class JsonReaderTest extends JsonTest {
             ToDoList td = reader.read();
             assertEquals("todolist1", td.getName());
             assertEquals(0, td.getSize());
-        } catch (IOException | ParseException e) {
+        } catch (IOException | ParseException | TooManyTasksException e) {
             fail("Couldn't read from file");
         }
     }
@@ -48,7 +49,7 @@ class JsonReaderTest extends JsonTest {
             assertEquals(2, td.getSize());
             checkTask("homework1", sdf.parse("2021-02-11"), "Doing", tasks.get(0));
             checkTask("homework2", sdf.parse("2021-02-12"), "Haven't start", tasks.get(1));
-        } catch (IOException | ParseException e) {
+        } catch (IOException | ParseException | TooManyTasksException e) {
             fail("Couldn't read from file");
         }
     }
