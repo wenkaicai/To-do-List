@@ -35,4 +35,12 @@ strategy that works great!
 ## Phase 4: Task 2
 
 The ToDoList class, addTask method has a robust design, it will throw the exception if we want to add a task when we 
-todo list size larger or equal 5.
+todo list size larger or equal to five.
+
+## Phase 4: Task 3
+
+At this point, the project is almost finished. To further improve my project, I think I could add an observer pattern 
+for this project in the future. For example, I can make my Task class extends an abstract subject class, and make my 
+ToDoList class implements Observer. Using this way will support the principle of loose coupling between objects that 
+interact with each other. It will also allow sending data to other objects effectively without any change in the 
+Subject or Observer classes. Observers can be added/removed at any point in time.
