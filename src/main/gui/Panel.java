@@ -20,7 +20,11 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-// Create TodoList Application panel
+/*
+ * Represents a ToDoList Application panel has some basic specification
+ * The panel has button for different function, like "Add", "Delete", "Save"
+ *  and "Load" buttons. It also has a pane for the user to type in the tasks.
+ */
 public class Panel extends JPanel
         implements ListSelectionListener {
 

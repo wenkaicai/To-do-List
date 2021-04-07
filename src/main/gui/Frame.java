@@ -3,7 +3,10 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-// Create ToDoList Application Frame
+/*
+ * Represents a ToDoList Application Frame has some basic specification
+ * The frame has a panel, and the frame has a title with the specific size
+ */
 public class Frame extends JFrame {
     Panel panel = new Panel();
 
